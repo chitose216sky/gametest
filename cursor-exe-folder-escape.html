@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CURSOR.EXE — Folder Escape</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at 15% 15%,#fff 0,#d9faff 35%,#ecddff 85%);font:15px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;color:#273253}
+#cursor-dash-x7{width:min(100%,780px);outline-offset:5px}.caption{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 12px;font-size:12px;font-weight:800;letter-spacing:1.5px;color:#485980}.window{overflow:hidden;border:2px solid #8d9fbd;border-radius:12px;background:#f4f7ff;box-shadow:6px 7px 0 #8693bc55}.bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 13px;background:linear-gradient(180deg,#fff,#c3dbf6 56%,#aebee3);border-bottom:2px solid #8d9fbd}.bar strong{font-size:13px;letter-spacing:.4px}.dots{display:flex;gap:5px}.dots i{width:11px;height:11px;border-radius:3px;background:#fa8db7;border:1px solid #7e8baa}.dots i:nth-child(2){background:#f4d36d}.dots i:nth-child(3){background:#8de0d1}.badge{padding:3px 8px;border-radius:30px;background:#f7faff;border:1px solid #9daecb;font-size:10px;color:#516183;white-space:nowrap}.hud{display:flex;justify-content:space-between;gap:10px;padding:8px 14px;background:#fcfdff;border-bottom:1px solid #c1cde2;font-size:12px;font-weight:800}.hud span{color:#7586a4}.hud b{color:#35476b}.stage{position:relative;overflow:hidden;background:#daf6ff;cursor:pointer}.stage canvas{display:block;width:100%;height:clamp(190px,40vw,290px);image-rendering:pixelated;touch-action:manipulation}.overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}.overlay[hidden]{display:none!important}.overlay-card{max-width:84%;border:2px solid #8593bc;background:#ffffffdf;padding:12px 24px;text-align:center;box-shadow:5px 5px 0 #8b9ac24f;backdrop-filter:blur(4px)}.overlay-title{font-size:clamp(15px,2.8vw,25px);font-weight:1000;letter-spacing:1.5px;color:#3d4c7b}.overlay-note{margin-top:4px;font-size:11px;color:#5e6e8c}.control-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:13px;background:#ecf3ff;border-top:2px solid #bfceea}.buttons{display:flex;flex-wrap:wrap;gap:8px}.btn{min-height:44px;border-radius:6px;border:2px solid #778ab3;padding:8px 12px;font:800 12px/1.3 ui-monospace,monospace;cursor:pointer;color:#344563;background:#fff;box-shadow:2px 3px 0 #a5b2d4;touch-action:manipulation}.btn.primary{background:linear-gradient(180deg,#fff7ff,#fec9ec);border-color:#c383b2}.btn.jump{background:linear-gradient(180deg,#f4ffff,#adf4ee);border-color:#76afbf}.btn:active{transform:translateY(2px);box-shadow:none}.btn:focus-visible{outline:3px solid #4d6bea;outline-offset:2px}.btn:disabled{opacity:.43;cursor:not-allowed}.hint{font-size:11px;color:#657493}.footer{padding:8px 12px;font-size:11px;color:#677b9a;background:white;border-top:1px solid #d4ddec}.caption .label{color:#d767a8}@media(max-width:440px){body{padding:8px}.bar strong{font-size:11px}.badge{display:none}.overlay-card{padding:8px 10px}.overlay-note{font-size:10px}.control-bar{justify-content:center}.buttons{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.btn{padding:8px 4px;font-size:11px}.hint{font-size:10px;text-align:center}.hud{font-size:10px;padding:8px}}
+</style>
+</head>
+<body>
+<div id="cursor-dash-x7" tabindex="0" aria-label="CURSOR.EXE 遊戲，按空白鍵或方向上鍵跳躍">
+  <div class="caption"><span><span class="label">✦</span> Y2K PIXEL WORLD <span class="label">✦</span></span><span>DESKTOP • 2000</span></div>
+  <section class="window" aria-label="小箭頭跑酷遊戲">
+    <div class="bar"><div class="dots" aria-hidden="true"><i></i><i></i><i></i></div><strong>📁 CURSOR.EXE / FOLDER ESCAPE</strong><span class="badge">v.01 ✧ ONLINE</span></div>
+    <div class="hud"><div><span>SCORE </span><b data-score>000000</b></div><div><span>BEST </span><b data-best>000000</b></div><div><span>LV. </span><b data-level>01</b></div></div>
+    <div class="stage"><canvas width="720" height="290" aria-label="Y2K 像素遊戲畫面，操控白色箭頭避開粉色資料夾"></canvas><div class="overlay" data-overlay><div class="overlay-card"><div class="overlay-title" data-overlay-title>CURSOR.RUN_</div><div class="overlay-note" data-overlay-note>按 START 或空白鍵開始 ◇</div></div></div></div>
+    <div class="control-bar"><div class="buttons"><button class="btn primary" type="button" data-start>▶ START</button><button class="btn jump" type="button" data-jump>↑ JUMP</button><button class="btn" type="button" data-pause disabled>Ⅱ PAUSE</button></div><span class="hint">SPACE / ↑ 跳躍 · 點遊戲畫面也可以跳</span></div>
+    <div class="footer" data-status role="status" aria-live="polite">準備出發：避開資料夾，別讓小箭頭變天使！</div>
+  </section>
+</div>
+<script>
+(()=>{
+  const root=document.getElementById('cursor-dash-x7');
+  if(root.dataset.initialized)return;
+  root.dataset.initialized='1';
+  const canvas=root.querySelector('canvas'),c=canvas.getContext('2d');
+  const scoreEl=root.querySelector('[data-score]'),bestEl=root.querySelector('[data-best]'),levelEl=root.querySelector('[data-level]');
+  const overlay=root.querySelector('[data-overlay]'),overlayTitle=root.querySelector('[data-overlay-title]'),overlayNote=root.querySelector('[data-overlay-note]');
+  const startBtn=root.querySelector('[data-start]'),jumpBtn=root.querySelector('[data-jump]'),pauseBtn=root.querySelector('[data-pause]'),statusEl=root.querySelector('[data-status]');
+  if(!c){statusEl.textContent='目前的瀏覽器不支援 Canvas。';return;}
+  const W=720,H=290,FLOOR=227,PLAYER_H=52,px=110,gravity=1500;
+  let mode='ready',y=FLOOR-PLAYER_H,vy=0,score=0,best=0,speed=245,spawn=1.1,folders=[],scroll=0,deathAge=0,last=0,raf=0;
+  const fmt=n=>String(Math.floor(n)).padStart(6,'0');
+  function ui(){
+    scoreEl.textContent=fmt(score);bestEl.textContent=fmt(best);levelEl.textContent=String(Math.min(99,1+Math.floor(score/80))).padStart(2,'0');
+    startBtn.textContent=mode==='ready'?'▶ START':'↻ RESTART';pauseBtn.textContent=mode==='paused'?'▶ RESUME':'Ⅱ PAUSE';pauseBtn.disabled=mode==='ready'||mode==='dead';
+    overlay.hidden=mode==='running';
+    if(mode==='ready'){overlayTitle.textContent='CURSOR.RUN_';overlayNote.textContent='按 START 或空白鍵開始 ◇';statusEl.textContent='準備出發：避開資料夾，別讓小箭頭變天使！';}
+    if(mode==='paused'){overlayTitle.textContent='Ⅱ PAUSED';overlayNote.textContent='按 RESUME 繼續';statusEl.textContent='遊戲暫停中。';}
+    if(mode==='dead'){overlayTitle.textContent='GAME OVER ♡';overlayNote.textContent='箭頭長出了白色翅膀！按 RESTART 再試一次';statusEl.textContent='遊戲結束！這次得到 '+fmt(score)+' 分。';}
+    if(mode==='running')statusEl.textContent='正在奔跑！按空白鍵或 ↑ 跳過資料夾。';
+  }
+  function schedule(){if(!raf)raf=requestAnimationFrame(frame);}
+  function start(){if(raf){cancelAnimationFrame(raf);raf=0;}mode='running';y=FLOOR-PLAYER_H;vy=0;score=0;speed=245;spawn=1.05;folders=[];scroll=0;deathAge=0;last=0;ui();render();schedule();}
+  function jump(){root.focus({preventScroll:true});if(mode==='ready'||mode==='dead')start();if(mode==='paused'){mode='running';last=0;ui();schedule();}if(mode==='running'&&y>=FLOOR-PLAYER_H-.5){vy=-575;y-=1;schedule();}}
+  function pauseToggle(){if(mode==='running'){mode='paused';if(raf){cancelAnimationFrame(raf);raf=0;}ui();render();}else if(mode==='paused'){mode='running';last=0;ui();schedule();}}
+  function newFolder(){const tall=Math.random()<.24, variant=Math.floor(Math.random()*3), w=tall?43:36+Math.round(Math.random()*10),h=tall?65:37+Math.round(Math.random()*10);folders.push({x:W+20,w,h,v:variant});}
+  function update(dt){
+    score+=dt*18;speed=Math.min(485,245+score*.53);scroll+=speed*dt;
+    vy+=gravity*dt;y+=vy*dt;if(y>FLOOR-PLAYER_H){y=FLOOR-PLAYER_H;vy=0;}
+    spawn-=dt;if(spawn<=0){newFolder();spawn=Math.max(.9,1.37-(speed-245)*.0014)+Math.random()*.4;}
+    for(const f of folders)f.x-=speed*dt;
+    folders=folders.filter(f=>f.x+f.w>-20);
+    for(const f of folders){if(px+30>f.x+6&&px+8<f.x+f.w-4&&y+47>FLOOR-f.h+5&&y+9<FLOOR-3){mode='dead';deathAge=0;best=Math.max(best,Math.floor(score));break;}}
+    if(Math.floor(score)%80===0&&score>0){};
+    scoreEl.textContent=fmt(score);bestEl.textContent=fmt(best);levelEl.textContent=String(Math.min(99,1+Math.floor(score/80))).padStart(2,'0');
+    if(mode==='dead')ui();
+  }
+  function rect(x,y,w,h,color){c.fillStyle=color;c.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h));}
+  function star(x,y,s,col){rect(x-s/2,y-1,s,2,col);rect(x-1,y-s/2,2,s,col);}
+  function background(){
+    const g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'#d1eafa');g.addColorStop(.65,'#f0e4ff');g.addColorStop(1,'#fcf5ff');c.fillStyle=g;c.fillRect(0,0,W,H);
+    for(let i=0;i<16;i++){const xx=((i*157+50-scroll*.12)%800+800)%800-35,yy=26+(i*37)%148;star(xx,yy,i%3===0?9:5,i%2===0?'#fff':'#b2d8f6');}
+    c.globalAlpha=.55;rect(386,38,176,93,'#fff');rect(386,38,176,12,'#83b9db');rect(399,59,145,3,'#e9d3ee');rect(399,69,100,3,'#c9def6');rect(399,79,130,3,'#c9def6');rect(399,89,89,3,'#f2cee8');rect(399,99,117,3,'#c9def6');
+    rect(601,100,92,76,'#fcfeff');rect(601,100,92,11,'#cab6e9');rect(613,127,50,5,'#b6e2e2');rect(613,140,62,5,'#e7cae3');c.globalAlpha=1;
+    // Scrolling grid floor: low contrast behind gameplay.
+    rect(0,FLOOR,W,3,'#8398cc');rect(0,FLOOR+3,W,H-FLOOR,'#deebfc');
+    for(let x=-40-(scroll*.6%40);x<W;x+=40)rect(x,FLOOR+13,24,3,'#b8cfe7');
+    for(let x=-60-(scroll*.4%60);x<W;x+=60)rect(x,FLOOR+40,1,22,'#d5c1e5');
+    rect(0,FLOOR+59,W,1,'#ceb6e5');
+    for(let i=0;i<6;i++){const x=((i*139+45-scroll*.25)%900+900)%900-30;rect(x,FLOOR-8,4,4,'#fffbff');}
+  }
+  function folder(f){
+    const x=Math.round(f.x),top=FLOOR-f.h,w=f.w,h=f.h;
+    const shades=[['#f8a8cf','#d46fae','#ffe0ef'],['#a3e6f0','#68afc9','#e0fdff'],['#c8b8ff','#947bc8','#ede7ff']][f.v];
+    rect(x+4,FLOOR+2,w-1,5,'#96a9d055');rect(x,top+9,w,h-9,'#4c557e');
+    rect(x+3,top+12,w-6,h-15,shades[1]);rect(x+2,top+4,Math.floor(w*.48),12,shades[1]);rect(x+4,top+5,Math.floor(w*.42),7,shades[2]);
+    rect(x+2,top+15,w-5,h-19,shades[0]);rect(x+5,top+18,w-12,3,shades[2]);rect(x+w-8,top+23,3,h-31,shades[1]);
+    rect(x+10,top+Math.floor(h*.58),w-19,3,'#fff5ff');
+    if(h>52){rect(x+11,top+31,4,4,'#f6f0ff');rect(x+21,top+31,4,4,'#f6f0ff');}
+  }
+  function wings(t){
+    const k=Math.min(1,t*4.1);if(k<=0)return;
+    c.save();c.globalAlpha=k;const xx=px,yy=y+20;
+    for(const side of [-1,1]){const a=side===-1?xx-25*k:xx+30,dir=side;
+      rect(a,yy-8*k,16*k,8*k,'#fff');rect(a+dir*6*k,yy-16*k,20*k,8*k,'#fff');rect(a+dir*8*k,yy+2*k,12*k,7*k,'#e4f8ff');rect(a+dir*2*k,yy+8*k,9*k,6*k,'#fff');}
+    c.strokeStyle='#fff7c8';c.lineWidth=4;c.beginPath();c.ellipse(px+16,y-10-8*k,17*k,5*k,0,0,Math.PI*2);c.stroke();c.restore();
+  }
+  function pointer(){
+    if(mode==='dead')wings(deathAge);
+    const bob=(mode==='running'&&vy===0)?Math.sin(scroll*.055)*1.4:0;
+    c.save();c.translate(Math.round(px),Math.round(y+bob));
+    c.fillStyle='#29324f';c.beginPath();c.moveTo(0,0);c.lineTo(0,46);c.lineTo(11,36);c.lineTo(20,51);c.lineTo(29,46);c.lineTo(20,31);c.lineTo(38,30);c.closePath();c.fill();
+    c.fillStyle='#fcfcff';c.beginPath();c.moveTo(4,7);c.lineTo(4,37);c.lineTo(12,29);c.lineTo(22,45);c.lineTo(24,44);c.lineTo(15,27);c.lineTo(31,27);c.closePath();c.fill();
+    rect(6,9,4,7,'#fff');rect(12,23,4,4,'#d7e8ff');
+    c.restore();
+    if(mode==='dead'){const t=Math.min(1,deathAge);star(px-27,y-12,9,'#fff');star(px+50,y-6,12,'#fff');c.font='bold 14px monospace';c.fillStyle='#7780b6';c.fillText('bye.exe',px+43,y-28-Math.round(t*6));}
+  }
+  function render(){background();for(const f of folders)folder(f);rect(px+8,FLOOR+5,33,4,'#a9bdd766');pointer();}
+  function frame(t){raf=0;const dt=last?Math.min(.034,(t-last)/1000):0;last=t;if(mode==='running')update(dt);else if(mode==='dead')deathAge=Math.min(1.2,deathAge+dt);render();if(mode==='running'||(mode==='dead'&&deathAge<1.2))schedule();}
+  startBtn.addEventListener('click',()=>{root.focus({preventScroll:true});start();});
+  jumpBtn.addEventListener('click',jump);
+  pauseBtn.addEventListener('click',pauseToggle);
+  canvas.addEventListener('pointerdown',e=>{if(e.button!==undefined&&e.button!==0)return;jump();});
+  root.addEventListener('keydown',e=>{if(e.target.closest('button,input,textarea,select,a'))return;if((e.code==='Space'||e.code==='ArrowUp')&&!e.repeat){e.preventDefault();jump();}else if(e.code==='KeyP'&&!e.repeat){e.preventDefault();pauseToggle();}});
+  ui();render();
+})();
+</script>
+</body></html>
